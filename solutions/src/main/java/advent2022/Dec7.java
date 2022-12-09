@@ -2,8 +2,6 @@ package advent2022;
 
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthSpinnerUI;
-
 import advent2022.utils.FileSystem;
 import advent2022.utils.IOUtils;
 
@@ -34,7 +32,9 @@ public class Dec7 {
         System.out.println("Part 1: ");
         fs.findDirsBySize(l -> l <= 100000l);
 
+        System.out.println("");
         System.out.println("--------------------");
+        System.out.println("");
         System.out.println("Part 2: ");
         
         long totalSizeOfDirs = fs.totalSize();
@@ -42,10 +42,9 @@ public class Dec7 {
         long free = fsMax - totalSizeOfDirs;
         long deficit = 30000000l - free;
 
-        System.out.println("\n\n\n");
         fs.findDirsBySize(l -> l >= deficit);
         System.out.println("");
-        System.out.println("Size of all dirs" + totalSizeOfDirs);
+        System.out.println("Size of all dirs " + totalSizeOfDirs);
         System.out.println("Deficit is " + deficit);
         System.out.println("Free space is " + free);
 

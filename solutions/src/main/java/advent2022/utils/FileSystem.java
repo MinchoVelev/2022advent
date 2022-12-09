@@ -79,7 +79,7 @@ public class FileSystem {
             return;
         }
         if(p.test(node.size)){
-            System.out.println(node.size + "\t" + node.name);
+            //System.out.println(node.size + "\t" + node.name);
             c.sum += node.size;
             if(node.size < c.min.size){
                 c.min = node;

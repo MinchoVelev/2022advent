@@ -1,6 +1,5 @@
 package advent2022;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 import advent2022.utils.DuplicateSearchingBinaryTree;
