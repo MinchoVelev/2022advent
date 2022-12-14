@@ -1,10 +1,6 @@
 package advent2022.utils;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Predicate;
-
-import javax.sql.rowset.spi.SyncResolver;
 
 public class FileSystem {
     FileSystemNode root;
@@ -18,7 +14,7 @@ public class FileSystem {
         currDir = root;
     }
 
-    public long totalSize(){
+    public long totalSize() {
         return root.size;
     }
 
@@ -32,8 +28,8 @@ public class FileSystem {
         } else if ("..".equals(path)) {
             currDir = currDir.parent;
         } else {
-            for(FileSystemNode n : currDir.subnodes){
-                if(n.name.equals(path) && n.directory){
+            for (FileSystemNode n : currDir.subnodes) {
+                if (n.name.equals(path) && n.directory) {
                     currDir = n;
                     return;
                 }
@@ -51,7 +47,7 @@ public class FileSystem {
         do {
             tmp.size += fileSize;
             tmp = tmp.parent;
-            if(tmp.parent == tmp){
+            if (tmp.parent == tmp) {
                 tmp.size += fileSize;
                 rootUpdated = true;
             }
@@ -62,10 +58,11 @@ public class FileSystem {
         printIfDir(root, 0);
     }
 
-    class Counter{
+    class Counter {
         long sum = 0l;
         FileSystemNode min = root;
     }
+
     public long findDirsBySize(Predicate<Long> p) {
         Counter c = new Counter();
         findDirBySize(root, p, c);
@@ -75,37 +72,35 @@ public class FileSystem {
     }
 
     private void findDirBySize(FileSystemNode node, Predicate<Long> p, Counter c) {
-        if(!node.directory){
+        if (!node.directory) {
             return;
         }
-        if(p.test(node.size)){
-            //System.out.println(node.size + "\t" + node.name);
+        if (p.test(node.size)) {
+            // System.out.println(node.size + "\t" + node.name);
             c.sum += node.size;
-            if(node.size < c.min.size){
+            if (node.size < c.min.size) {
                 c.min = node;
             }
         }
 
-        for(FileSystemNode n: node.subnodes){
+        for (FileSystemNode n : node.subnodes) {
             findDirBySize(n, p, c);
         }
     }
 
     private void printIfDir(FileSystemNode node, int depth) {
-        if(!node.directory){
+        if (!node.directory) {
             return;
         }
         System.out.print(node.size + "\t\t");
-        for(int i = depth; i >= 0; i--){
+        for (int i = depth; i >= 0; i--) {
             System.out.print("  ");
         }
         System.out.println(node.name);
 
-        for(FileSystemNode n: node.subnodes){
+        for (FileSystemNode n : node.subnodes) {
             printIfDir(n, depth + 1);
         }
     }
-
-
 
 }
